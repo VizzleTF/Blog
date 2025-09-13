@@ -2,80 +2,64 @@ import type { Site, Page, Links, Socials } from "@types"
 
 // Global
 export const SITE: Site = {
-  TITLE: "Astro Sphere",
-  DESCRIPTION: "Welcome to Astro Sphere, a portfolio and blog for designers and developers.",
-  AUTHOR: "Mark Horn",
-}
-
-// Work Page
-export const WORK: Page = {
-  TITLE: "Work",
-  DESCRIPTION: "Places I have worked.",
+  TITLE: "Сказочный девопес",
+  DESCRIPTION: "Сказочный девопес, блог о девопсе и его инструментах.",
+  AUTHOR: "Ivan K",
 }
 
 // Blog Page
 export const BLOG: Page = {
-  TITLE: "Blog",
-  DESCRIPTION: "Writing on topics I am passionate about.",
+  TITLE: "Блог",
+  DESCRIPTION: "Записи на темы, которые меня интересуют.",
 }
 
 // Projects Page 
 export const PROJECTS: Page = {
-  TITLE: "Projects",
-  DESCRIPTION: "Recent projects I have worked on.",
+  TITLE: "Проекты",
+  DESCRIPTION: "Последние проекты, над которыми я работал.",
 }
 
 // Search Page
 export const SEARCH: Page = {
-  TITLE: "Search",
-  DESCRIPTION: "Search all posts and projects by keyword.",
+  TITLE: "Поиск",
+  DESCRIPTION: "Поиск всех постов и проектов по ключевым словам.",
 }
 
 // Links
 export const LINKS: Links = [
   { 
-    TEXT: "Home", 
+    TEXT: "Главная", 
     HREF: "/", 
   },
   { 
-    TEXT: "Work", 
-    HREF: "/work", 
-  },
-  { 
-    TEXT: "Blog", 
+    TEXT: "Блог", 
     HREF: "/blog", 
   },
   { 
-    TEXT: "Projects", 
+    TEXT: "Проекты", 
     HREF: "/projects", 
   },
 ]
 
 // Socials
 export const SOCIALS: Socials = [
+  {
+    NAME: "Telegram",
+    ICON: "telegram",
+    TEXT: "@gemini_commit",
+    HREF: "https://t.me/gemini_commit",
+  },
   { 
     NAME: "Email",
     ICON: "email", 
-    TEXT: "markhorn.dev@gmail.com",
-    HREF: "mailto:markhorn.dev@gmail.com",
+    TEXT: "vizzletf@gmail.com",
+    HREF: "mailto:vizzletf@gmail.com",
   },
   { 
     NAME: "Github",
     ICON: "github",
-    TEXT: "markhorn-dev",
-    HREF: "https://github.com/markhorn-dev/astro-sphere"
-  },
-  { 
-    NAME: "LinkedIn",
-    ICON: "linkedin",
-    TEXT: "markhorn-dev",
-    HREF: "https://www.linkedin.com/in/markhorn-dev/",
-  },
-  { 
-    NAME: "Twitter",
-    ICON: "twitter-x",
-    TEXT: "markhorn_dev",
-    HREF: "https://twitter.com/markhorn_dev",
+    TEXT: "vizzletf",
+    HREF: "https://github.com/vizzletf"
   },
 ]
 

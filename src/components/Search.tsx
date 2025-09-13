@@ -34,12 +34,12 @@ export default function Search({ data }: Props) {
 
   return (
     <div class="flex flex-col">
-      <SearchBar onSearchInput={onSearchInput} query={query} setQuery={setQuery} placeholderText="What are you looking for?" />
+      <SearchBar onSearchInput={onSearchInput} query={query} setQuery={setQuery} placeholderText="Что вы ищете?" />
 
       {(query().length >= 2 && results().length >= 1) && (
         <div class="mt-12">
           <div class="text-sm uppercase mb-2">
-            Found {results().length} results for {`'${query()}'`}
+            Найдено {results().length} результатов для {`'${query()}'`}
           </div>
           <ul class="flex flex-col gap-3">
             {results().map(result => (
