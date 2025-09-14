@@ -1,3 +1,10 @@
+function updateFavicon(theme) {
+  const favicon = document.getElementById("favicon")
+  if (favicon) {
+    favicon.href = theme === "dark" ? "/favicon-dark.svg" : "/favicon-light.svg"
+  }
+}
+
 function changeTheme() {
   const element = document.documentElement
   const theme = element.classList.contains("dark") ? "light" : "dark"
@@ -26,6 +33,7 @@ function changeTheme() {
   window.getComputedStyle(css).opacity
   document.head.removeChild(css)
   localStorage.theme = theme
+  updateFavicon(theme)
 }
 
 function preloadTheme() {
@@ -48,6 +56,7 @@ function preloadTheme() {
   }
 
   localStorage.theme = theme
+  updateFavicon(theme)
 }
 
 window.onload = () => {
