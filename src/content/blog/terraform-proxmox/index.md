@@ -28,7 +28,7 @@ Terraform - это один из самых лучших и популярных
 
 # А как понять, что доступно?
 
-Очень просто, к каждому приличному провайдеру существует документация, где описаны все сущности, которыми можно с помощью него управлять. Как правило этой документации достаточно. Пример: ![Terraform Proxmox Provider Documentation](./Pasted%20image%2020250915184710.png)
+Очень просто, к каждому приличному провайдеру существует документация, где описаны все сущности, которыми можно с помощью него управлять. Как правило этой документации достаточно. Пример: ![Terraform Proxmox Provider Documentation](/blog/terraform-proxmox/Pasted%20image%2020250915184710.png)
 
 # Подготовка окружения и провайдера
 
@@ -36,9 +36,9 @@ Terraform - это один из самых лучших и популярных
 В данном примере я буду использовать бесплатное объектное хранилище от cloud.ru
 
 Создаем s3 бакет:
-![Creating S3 bucket](./CleanShot%202025-09-15%20at%2019.06.16@2x.png)
+![Creating S3 bucket](/blog/terraform-proxmox/CleanShot%202025-09-15%20at%2019.06.16@2x.png)
 И ключ доступа для него:
-![Access key creation](./Pasted%20image%2020250915190740.png)
+![Access key creation](/blog/terraform-proxmox/Pasted%20image%2020250915190740.png)
 
 Создаем файл backend.tf:
 ```yaml
@@ -68,7 +68,7 @@ export AWS_SECRET_ACCESS_KEY="<secret_key>"
 ```sh
 terraform init
 ```
-![Proxmox setup](./Pasted%20image%2020250915190915.png)
+![Proxmox setup](/blog/terraform-proxmox/Pasted%20image%2020250915190915.png)
 
 Добавляем описание провайдера и необходимые переменные:
 provider.tf
@@ -119,7 +119,7 @@ export TF_VAR_main_password="ваш_пароль"
 terraform init
 ```
 и видим:
-![Terraform configuration](./Pasted%20image%2020250915191609.png)
+![Terraform configuration](/blog/terraform-proxmox/Pasted%20image%2020250915191609.png)
 
 Это все, что нам необходимо для начала управления ресурсами в проксмоксе через терраформ!
 
@@ -143,7 +143,7 @@ resource "proxmox_virtual_environment_download_file" "latest_ubuntu_22_jammy_qco
 ```sh
 terraform plan
 ```
-![VM creation process](./Pasted%20image%2020250915193654.png)
+![VM creation process](/blog/terraform-proxmox/Pasted%20image%2020250915193654.png)
 
 То что нужно, применяем:
 ```sh
@@ -151,10 +151,10 @@ terraform apply
 ```
 
 Можем понаблюдать, что происходит через веб:
-![Web interface monitoring](./Pasted%20image%2020250915193949.png)
+![Web interface monitoring](/blog/terraform-proxmox/Pasted%20image%2020250915193949.png)
 
 Отлично, мы успешно импортировали имейдж:
-![VM deployment status](./Pasted%20image%2020250915194017.png)
+![VM deployment status](/blog/terraform-proxmox/Pasted%20image%2020250915194017.png)
 
 Давайте, наконец, создадим нашу первую ВМ!
 vms.tf
@@ -240,7 +240,7 @@ export TF_VAR_pc_public_key=$(cat ~/.ssh/id_rsa.pub)
 2. Рендомный пароль для пользователя ubuntu
 
 Применяем через `terraform apply`
-![Cloud-init configuration](./Pasted%20image%2020250915195048.png)
+![Cloud-init configuration](/blog/terraform-proxmox/Pasted%20image%2020250915195048.png)
 наша чудесная машина готова, но какой же пароль у пользователя убунту? Давайте узнаем:
 output.tf
 ```yaml
@@ -255,13 +255,13 @@ output "ubuntu_vm_password" {
 terraform output -raw ubuntu_vm_password
 ```
 вот и наш пароль!
-![Generated password output](./Pasted%20image%2020250915195945.png)
+![Generated password output](/blog/terraform-proxmox/Pasted%20image%2020250915195945.png)
 
 Не рекомендую использовать dhcp в инфраструктуре, но для первой ВМ пойдет. Найдем ее адрес на роутере:
-![SSH connection test](./Pasted%20image%2020250915200510.png)
+![SSH connection test](/blog/terraform-proxmox/Pasted%20image%2020250915200510.png)
 
 и зайдем на нее по ssh
-![Successful SSH login](./Pasted%20image%2020250915200532.png)
+![Successful SSH login](/blog/terraform-proxmox/Pasted%20image%2020250915200532.png)
 
 Ура, мы внутри. Все благодаря тому, что мы указали наш паблик ссш ключ в настройках. Удобно? Я думаю да!
 
@@ -510,9 +510,9 @@ vms:
 ```
 
 После добавления модуля необходимо сделать `terraform init`, чтобы он установил наши модули:
-![Terraform init with modules](./Pasted%20image%2020250915201551.png)
+![Terraform init with modules](/blog/terraform-proxmox/Pasted%20image%2020250915201551.png)
 и попробуем теперь сделать terraform plan:
-![Terraform plan with modules](./Pasted%20image%2020250915202844.png)
+![Terraform plan with modules](/blog/terraform-proxmox/Pasted%20image%2020250915202844.png)
 
 Магия сработала! 
 Теперь чтобы создать новую ВМ, нам всего лишь надо добавить ее в vms.yaml в человекочитаемом формате!
