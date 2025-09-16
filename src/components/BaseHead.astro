@@ -72,30 +72,8 @@ const { title, description, image = "/open-graph.png" } = Astro.props;
 <script is:inline src="/js/animate.js"></script>
 <script defer is:inline src="/js/copy.js"></script>
 
-<!-- Matomo -->
-<script>
-  declare global {
-    interface Window {
-      _paq: any[];
-    }
-  }
-
-  var _paq: any[] = (window._paq = window._paq || []);
-  _paq.push(["trackPageView"]), _paq.push(["enableLinkTracking"]);
-  (function () {
-    _paq.push(["setTrackerUrl", "//tom.vaka.work/qanptym.php"]),
-      _paq.push(["setSiteId", "1"]);
-    var a = document,
-      r = a.createElement("script"),
-      s = a.getElementsByTagName("script")[0];
-    (r.async = !0), (r.defer = !0), (r.src = "//tom.vaka.work/pppesuv.php");
-    if (s && s.parentNode) {
-      s.parentNode.insertBefore(r, s);
-    }
-  })();
-</script>
-<noscript><img src="//tom.vaka.work/qanptym.php?dhn=1&coy=1" /></noscript>
-<!-- End Matomo Code -->
+<!-- Umami Analytics -->
+<script defer src="https://uma.vaka.work/mi" data-website-id="3f4d70b9-c507-4bf0-b9ba-6b8ae65003df"></script>
 
 <!-- <ViewTransitions  /> -->
 
