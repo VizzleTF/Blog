@@ -1,7 +1,7 @@
 {
   "headers": [
     {
-      "source": "/mao.js",
+      "source": "/sltprjv.js",
       "headers": [
         {
           "key": "Cache-Control",
@@ -14,7 +14,7 @@
       ]
     },
     {
-      "source": "/mao.php",
+      "source": "/wnlzept.php",
       "headers": [
         {
           "key": "Cache-Control",
@@ -29,12 +29,12 @@
   ],
   "rewrites": [
     {
-      "source": "/mao.js",
-      "destination": "https://tom.vaka.work/matomo.js"
+      "source": "/sltprjv.js",
+      "destination": "https://tom.vaka.work/sltprjv.php"
     },
     {
-      "source": "/mao.php",
-      "destination": "https://tom.vaka.work/matomo.php"
+      "source": "/wnlzept.php",
+      "destination": "https://tom.vaka.work/wnlzept.php"
     }
   ]
 }
