@@ -7,7 +7,7 @@ type Context = {
 }
 
 export async function GET(context: Context) {
-	const posts = await getCollection("blog")
+  const posts = await getCollection("blog")
   const projects = await getCollection("projects")
 
   const items = [...posts, ...projects]

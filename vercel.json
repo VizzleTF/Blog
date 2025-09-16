@@ -1,7 +1,7 @@
 {
   "headers": [
     {
-      "source": "/mi",
+      "source": "/mi.js",
       "headers": [
         {
           "key": "Cache-Control",
@@ -12,12 +12,29 @@
           "value": "application/javascript"
         }
       ]
+    },
+    {
+      "source": "/api/send",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        },
+        {
+          "key": "Content-Type",
+          "value": "image/gif"
+        }
+      ]
     }
   ],
   "rewrites": [
     {
-      "source": "/mi",
+      "source": "/mi.js",
       "destination": "https://uma.vaka.work/mi"
+    },
+    {
+      "source": "/api/send",
+      "destination": "https://uma.vaka.work/api/send"
     }
   ]
 }

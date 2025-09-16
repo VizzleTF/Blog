@@ -8,11 +8,11 @@ import solidJs from "@astrojs/solid-js"
 export default defineConfig({
   site: "https://devops.vaka.work",
   integrations: [
-    mdx(), 
+    mdx(),
     sitemap({
       filter: (page) => !page.includes('/draft/')
-    }), 
-    solidJs(), 
+    }),
+    solidJs(),
     tailwind({ applyBaseStyles: false })
   ],
 })
