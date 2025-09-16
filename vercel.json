@@ -1,0 +1,40 @@
+{
+  "headers": [
+    {
+      "source": "/mao.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        },
+        {
+          "key": "Content-Type",
+          "value": "application/javascript"
+        }
+      ]
+    },
+    {
+      "source": "/mao.php",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        },
+        {
+          "key": "Content-Type",
+          "value": "image/gif"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/mao.js",
+      "destination": "https://tom.vaka.work/matomo.js"
+    },
+    {
+      "source": "/mao.php",
+      "destination": "https://tom.vaka.work/matomo.php"
+    }
+  ]
+}
