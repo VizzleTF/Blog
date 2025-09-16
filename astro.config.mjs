@@ -7,5 +7,12 @@ import solidJs from "@astrojs/solid-js"
 // https://astro.build/config
 export default defineConfig({
   site: "https://devops.vaka.work",
-  integrations: [mdx(), sitemap(), solidJs(), tailwind({ applyBaseStyles: false })],
+  integrations: [
+    mdx(), 
+    sitemap({
+      filter: (page) => !page.includes('/draft/')
+    }), 
+    solidJs(), 
+    tailwind({ applyBaseStyles: false })
+  ],
 })
