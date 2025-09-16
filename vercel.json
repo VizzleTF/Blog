@@ -1,7 +1,7 @@
 {
   "headers": [
     {
-      "source": "/rrdywdp.js",
+      "source": "/mi",
       "headers": [
         {
           "key": "Cache-Control",
@@ -12,29 +12,12 @@
           "value": "application/javascript"
         }
       ]
-    },
-    {
-      "source": "/hilsugc.php",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "no-cache, no-store, must-revalidate"
-        },
-        {
-          "key": "Content-Type",
-          "value": "image/gif"
-        }
-      ]
     }
   ],
   "rewrites": [
     {
-      "source": "/rrdywdp.js",
-      "destination": "https://tom.vaka.work/rrdywdp.php"
-    },
-    {
-      "source": "/hilsugc.php",
-      "destination": "https://tom.vaka.work/hilsugc.php"
+      "source": "/mi",
+      "destination": "https://uma.vaka.work/mi"
     }
   ]
 }
