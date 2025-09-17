@@ -1,0 +1,14 @@
+---
+// Speed Insights component for Astro
+// Based on @vercel/speed-insights package
+---
+
+<script>
+  // Import and initialize Speed Insights
+  import { injectSpeedInsights } from '@vercel/speed-insights';
+  
+  // Initialize Speed Insights when the page loads
+  if (typeof window !== 'undefined') {
+    injectSpeedInsights();
+  }
+</script>
