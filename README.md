@@ -1,89 +1,60 @@
-![Astro Sphere Lighthouse Score](_astrosphere.jpg)
+# DevOps Alchemy Blog
 
-Astro Sphere is a static, minimalist, lightweight, lightning fast portfolio and blog theme based on my personal website.
+Modern personal blog and portfolio built with Astro, featuring DevOps content, project showcases, and technical articles.
 
-It is primarily Astro, Tailwind and Typescript, with a very small amount of SolidJS for stateful components.
+## 🚀 Tech Stack
 
-## 🚀 Deploy your own
+- **Framework**: [Astro](https://astro.build/) - Static site generator with modern web standards
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- **UI Components**: [Solid.js](https://www.solidjs.com/) - Reactive UI library
+- **Content**: MDX - Markdown with JSX components
+- **Search**: [Fuse.js](https://fusejs.io/) - Fuzzy search library
+- **Comments**: [Giscus](https://giscus.app/) - GitHub Discussions-powered comments
+- **Analytics**: Vercel Analytics & Speed Insights
+- **Deployment**: Vercel (configured for devops.vaka.work)
 
-[![Deploy with Vercel](_deploy_vercel.svg)](https://vercel.com/new/clone?repository-url=https://github.com/VizzleTF/astro-sphere)  [![Deploy with Netlify](_deploy_netlify.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/VizzleTF/astro-sphere)
+## 🎨 Features
 
-## 📋 Features
+- **Responsive Design** - Mobile-first approach with Tailwind CSS
+- **Dark/Light Mode** - Automatic theme switching
+- **Search Functionality** - Fuzzy search across all content
+- **SEO Optimized** - Meta tags, sitemap, RSS feed
+- **Fast Loading** - Optimized images and static generation
+- **Comments System** - GitHub Discussions integration
+- **Analytics** - Vercel Analytics and Speed Insights
 
-- ✅ 100/100 Lighthouse performance
-- ✅ Responsive
-- ✅ Accessible
-- ✅ SEO-friendly
-- ✅ Typesafe
-- ✅ Minimal style
-- ✅ Light/Dark Theme
-- ✅ Animated UI
-- ✅ Tailwind styling
-- ✅ Auto generated sitemap
-- ✅ Auto generated RSS Feed
-- ✅ Markdown support
-- ✅ MDX Support (components in your markdown)
-- ✅ Searchable content (posts and projects)
-- ✅ Code Blocks - copy to clipboard
+## 🚀 Deployment
 
-## 💯 Lighthouse score
-![Astro Sphere Lighthouse Score](_lighthouse.png)
+The site is configured for deployment on Vercel with the domain `devops.vaka.work`.
 
-## 🕊️ Lightweight
-All pages under 100kb (including fonts)
+## 📊 Content Categories
 
-## ⚡︎ Fast
-Rendered in ~40ms on localhost
+### Blog Topics
+- **Infrastructure as Code** (Terraform, Proxmox)
+- **Kubernetes & DevOps**
+- **Self-hosted Solutions**
+- **Home Lab Setup**
 
-## 📄 Configuration
+### Project Categories
+- **DevOps Tools** (Monitoring, Infrastructure)
+- **Mobile Applications** (Android, Kotlin)
+- **Web Development** (React, TypeScript)
+- **AI/ML Tools** (VS Code Extensions)
+- **Security Tools** (TOTP, Authentication)
 
-The blog posts on the demo serve as the documentation and configuration.
+## 🤝 Contributing
 
-## 💻 Commands
+1. Fork the repository
+2. Create a feature branch
+3. Add your content following the established structure
+4. Submit a pull request
 
-All commands are run from the root of the project, from a terminal:
+## 📄 License
 
-Replace npm with your package manager of choice. `npm`, `pnpm`, `yarn`, `bun`, etc
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run dev:network`     | Starts dev server on local network               |
-| `npm run sync`            | Generates TypeScript types for all Astro modules.|
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run preview:network` | Starts preview server on local network           |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-| `npm run lint`            | Run ESLint                                       |
-| `npm run lint:fix`        | Auto-fix ESLint issues                           |
+## 🔗 Links
 
-## 🗺️ Roadmap
-
-A few features I plan to implement
-- ⬜ Article Pages - Table of Contents
-- ⬜ Article Pages - Share on social media
-
-## ✨ Acknowledgement
-
-Theme inspired by [Paco Coursey](https://paco.me/), [Lee Robinson](https://leerob.io/) and [Hayden Bleasel](https://www.haydenbleasel.com/)
-
-
-## 🏛️ License
-
-MIT
-
-
-# 1.0.1 Update
-
-Added ability to run dev and preview on local network.
-added npm run dev:network
-added npm run preview:network
-
-Added slightly more particle density in both light and dark mode.
-
-Added subtle dark mode star and meteor animations.
-
-Removed eslint config
-
+- **Live Site**: [devops.vaka.work](https://devops.vaka.work)
+- **Astro Documentation**: [docs.astro.build](https://docs.astro.build)
+- **Tailwind CSS**: [tailwindcss.com](https://tailwindcss.com)
