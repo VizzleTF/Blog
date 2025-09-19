@@ -20,7 +20,9 @@ export async function GET(context: Context) {
     site: context.site,
     items: items.map((item) => ({
       title: item.data.title,
-      description: item.data.summary,
+      description: item.collection === "blog" && item.data.rss 
+        ? item.data.rss 
+        : item.data.summary,
       pubDate: item.data.date,
       link: item.collection === "blog"
         ? `/blog/${item.slug}/`

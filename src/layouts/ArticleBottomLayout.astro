@@ -1,6 +1,7 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
 import Giscus from "@components/Giscus.astro";
+import TableOfContents from "@components/TableOfContents.astro";
 
 type Props = {
   entry: CollectionEntry<"blog"> | CollectionEntry<"projects">;
@@ -9,7 +10,7 @@ type Props = {
 // Get the requested entry
 const { entry } = Astro.props;
 const { collection } = entry;
-const { Content } = await entry.render();
+const { Content, headings } = await entry.render();
 
 // Get the next and prev entries (modulo to wrap index)
 const items = (await getCollection(collection))
@@ -22,6 +23,7 @@ const next = items[(index + 1) % items.length];
 
 <div>
   <article>
+    {collection === "blog" && <TableOfContents headings={headings} />}
     <Content />
     {collection === "blog" && <Giscus />}
   </article>

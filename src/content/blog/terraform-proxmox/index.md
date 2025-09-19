@@ -7,6 +7,7 @@ tags:
   - terraform
   - proxmox
   - infrastructure as a code
+rss: "Terraform - это один из самых лучших и популярных инструментов для Infrastructure as a Code. В этой статье рассказываю, как подружить его с Proxmox и управлять своими виртуальными машинами через Terraform!"
 ---
 
 # Вступление
