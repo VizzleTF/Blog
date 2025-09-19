@@ -18,15 +18,27 @@ export async function GET(context: Context) {
     title: SITE.TITLE,
     description: SITE.DESCRIPTION,
     site: context.site,
-    items: items.map((item) => ({
-      title: item.data.title,
-      description: item.collection === "blog" && item.data.rss 
+    items: items.map((item) => {
+      const baseDescription = item.collection === "blog" && item.data.rss 
         ? item.data.rss 
-        : item.data.summary,
-      pubDate: item.data.date,
-      link: item.collection === "blog"
-        ? `/blog/${item.slug}/`
-        : `/projects/${item.slug}/`,
-    })),
+        : item.data.summary;
+      
+      const articleLink = item.collection === "blog"
+        ? `${context.site}blog/${item.slug}/`
+        : `${context.site}projects/${item.slug}/`;
+      
+      const fullDescription = item.collection === "blog" 
+        ? `${baseDescription}\n\nЧитать статью: ${articleLink}`
+        : baseDescription;
+
+      return {
+        title: item.data.title,
+        description: fullDescription,
+        pubDate: item.data.date,
+        link: item.collection === "blog"
+          ? `/blog/${item.slug}/`
+          : `/projects/${item.slug}/`,
+      };
+    }),
   })
 }
