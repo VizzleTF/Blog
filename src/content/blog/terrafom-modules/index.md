@@ -226,7 +226,7 @@ Output - это блок, который позволяет экспортиро
 Создадим файл output.tf в папке модуля:
 ![Структура папки модуля с добавленным файлом output.tf](./Pasted%20image%2020250920115838.png)
 со следующим содержимым:
-```yaml
+```hcl
 output "downloaded_image_files" {
   description = "List of downloaded image file names"
   value = [
@@ -235,7 +235,7 @@ output "downloaded_image_files" {
 }
 ```
 теперь создадим конфигурационный файл в корне output.tf, который будет вызывать этот аутпут:
-```yaml
+```hcl
 output "downloaded_image_files" {
   description = "List of downloaded image file names"
   value       = module.cloud_images.downloaded_image_files

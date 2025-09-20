@@ -71,7 +71,7 @@ export AWS_ACCESS_KEY_ID="<tennant_id>:<access_key>"
 export AWS_SECRET_ACCESS_KEY="<secret_key>"
 ```
 
-**Внимательно!** В access key нужно положить и tennant_id и access_key через двоеточие!
+> 💡 **Внимательно!** В access key нужно положить и tennant_id и access_key через двоеточие!
 
 После этого мы можем инициализировать terraform:
 
@@ -83,7 +83,7 @@ terraform init
 
 Добавляем описание провайдера и необходимые переменные:
 provider.tf
-```yaml
+```hcl
 # https://registry.terraform.io/providers/bpg/proxmox/latest/docs
 terraform {
   required_providers {
@@ -101,7 +101,7 @@ provider "proxmox" {
 }
 ```
 variables.tf
-```yaml
+```hcl
 variable "endpoint" {
   description = "Hostname or IP of Proxmox server"
   type        = string
