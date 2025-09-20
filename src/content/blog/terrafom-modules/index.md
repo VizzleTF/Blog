@@ -1,0 +1,253 @@
+---
+title: "Создание модулей Terraform"
+summary: "Небольшой гайд по созданию модулей terraform на примере proxmox провайдера bpg"
+date: "Sep 20 2025"
+draft: false
+tags:
+  - terraform
+  - proxmox
+  - infrastructure as a code
+rss: "Terraform - продолжение. Создание модулей terraform на примере proxmox провайдера bpg"
+---
+
+В прошлой статье мы переиспользовали мой готовый модуль с ВМ.
+Давайте в этой статье создадим свой модуль для скачивания cloud образов ОС.
+
+## Cloud-images vs Дистрибутив
+
+### Что такое клауд образ и в чем его отличие от "обычного" образа?
+
+**«Обычный» образ** — это  ISO-файл с дистрибутивом для установки ОС, при развёртывании на его основе обычно требуется ручная или скриптовая установка и донастройка системы.
+
+**Cloud-образ** - это виртуальный диск, содержащий уже установленную и настроенную операционную систему, снабжённый механизмами автоматической инициализации (в нашем случае через _cloud-init_). При старте виртуальной машины облачная платформа или гипервизор передаёт этим механизмам параметры (имя хоста, SSH-ключи, сетевые настройки и др.), после чего система автоматически завершает настройку без вмешательства пользователя.
+
+|Свойство|Cloud-образ|Обычный образ|
+|---|---|---|
+|Настройка при первом запуске|Автоматическая через cloud-init|Отсутствует, требует ручной или скриптовой настройки|
+|Размер|Оптимизирован, содержит только базовые компоненты|Может быть больше, включает полный дистрибутив или ПО|
+|Интеграция с платформой|Тесно интегрирован с облачными сервисами (метаданные, сети, SSH-ключи)|Независим от платформы, без автоматической интеграции|
+|Масштабируемость|Высокая: быстрый клонинг и развертывание множества экземпляров с разными параметрами|Средняя: требуется дополнительная настройка для каждого клона|
+|Сценарии использования|Автоматизация CI/CD, быстрый автоскейлинг, унифицированные VM|Кастомные шаблоны, специализированные инсталляции, физические сервера|
+## Описание ресурса
+
+Любое создание модуля начинается с получения информации о ресурсе, который мы хотим описать модулем. В нашем случае это [proxmox_virtual_environment_download_file](https://registry.terraform.io/providers/bpg/proxmox/latest/docs/resources/virtual_environment_download_file)
+
+Ознакомившись с примерами и схемой под ними, начинаем разбирать поля
+
+```yaml
+resource "proxmox_virtual_environment_download_file" "release_20231228_debian_12_bookworm_qcow2" {
+  content_type       = "import"
+  datastore_id       = "local"
+  file_name          = "debian-12-generic-amd64-20231228-1609.qcow2"
+  node_name          = "pve"
+  url                = "https://cloud.debian.org/images/cloud/bookworm/20231228-1609/debian-12-generic-amd64-20231228-1609.qcow2"
+  checksum           = "d2fbcf11fb28795842e91364d8c7b69f1870db09ff299eb94e4fbbfa510eb78d141e74c1f4bf6dfa0b7e33d0c3b66e6751886feadb4e9916f778bab1776bdf1b"
+  checksum_algorithm = "sha512"
+}
+
+resource "proxmox_virtual_environment_download_file" "latest_debian_12_bookworm_qcow2_img" {
+  content_type = "iso"
+  datastore_id = "local"
+  file_name    = "debian-12-generic-amd64.qcow2.img"
+  node_name    = "pve"
+  url          = "https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-generic-amd64.qcow2"
+}
+```
+
+Основные параметры, которые интересуют нас в первую очередь:
+
+| Параметр     | Тип    | Описание                                                                              | Пример значения                                                                          |
+| ------------ | ------ | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| content_type | String | Тип содержимого образа, определяет папку на датасторе (например, `iso` или `vztmpl`). | iso                                                                                      |
+| datastore_id | String | Идентификатор datastore, куда будет сохранён образ.                                   | local-lvm                                                                                |
+| node_name    | String | Имя узла (node) Proxmox, с которого будет выполняться загрузка образа.                | pve01                                                                                    |
+| url          | String | URL для скачивания образа.                                                            | [https://example.com/ubuntu-22.04-cloud.img](https://example.com/ubuntu-22.04-cloud.img) |
+
+Параметры ниже не являются обязательными, но могут быть нам полезны:
+
+| Параметр                | Тип     | Описание                                                                                                                                                    |
+| ----------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| checksum                | String  | Ожидаемая контрольная сумма файла.                                                                                                                          |
+| checksum_algorithm      | String  | Алгоритм расчёта контрольной суммы. Допустимые: `md5`, `sha1`, `sha224`, `sha256`, `sha384`, `sha512`.                                                      |
+| decompression_algorithm | String  | Алгоритм распаковки после загрузки. Допустимые: `gz`, `lzo`, `zst`, `bz2`.                                                                                  |
+| file_name               | String  | Имя файла в datastore. По умолчанию вычисляется из URL.                                                                                                     |
+| overwrite               | Boolean | Если `true` (по умолчанию), при изменении размера файла в datastore он будет перезаписан. Если `false`, проверка не будет выполняться.                      |
+| overwrite_unmanaged     | Boolean | Если `true`, при наличии файла с тем же именем в datastore старый файл удаляется и загружается новый. Если `false`, в случае существования выдается ошибка. |
+| upload_timeout          | Number  | Таймаут на загрузку файла в секундах. По умолчанию 600 (10 мин).                                                                                            |
+| verify                  | Boolean | Если `true` (по умолчанию), проверяются SSL/TLS сертификаты при скачивании. Если `false`, проверка отключается.                                             |
+
+Для нашего модуля, помимо основных, будем использовать эти (сдалем их необязательными):
+
+checksum, checksum_algorithm, file_name, overwrite, upload_timeout
+
+## Создание модуля
+
+### Конфигурационный файл 
+
+Создадим конфигурационный файл cloud_images.tf в корне проекта, который будет парсить наш yaml конфиг в модуль, который мы создаем:
+```yaml
+locals {
+  vms_config = yamldecode(file("./configs/images.yaml"))
+}
+
+module "cloud_images" {
+  source = "./modules/cloud_images"
+
+  images_config = local.images_config
+}
+```
+
+### Модуль
+
+Создадим папку под наш новый модуль и 2 файла в ней:
+![Структура папки модуля cloud_images с файлами images.tf и variables.tf](./Pasted%20image%2020250920113032.png)
+
+Начнем заполнять наш модуль images.tf:
+
+Описываем провайдер, который будет использоваться модулем:
+```yaml
+terraform {
+  required_providers {
+    proxmox = {
+      source = "bpg/proxmox"
+    }
+  }
+}
+```
+Т.к. мы будем использовать булевый параметр enable, соберем новую карту (map) с только включенными образами.
+```yaml
+locals {
+  enabled_images = {
+    for key, image in var.images_config.images : key => image
+    if image.enabled
+  }
+}
+```
+И опишем сам ресурс:
+```yaml
+resource "proxmox_virtual_environment_download_file" "cloud_images" {
+  for_each = local.enabled_images
+
+  # Use image-specific settings with fallback to global settings
+  node_name    = coalesce(each.value.node_name, var.images_config.global.node_name)
+  datastore_id = coalesce(each.value.datastore_id, var.images_config.global.datastore_id)
+
+  content_type = each.value.content_type
+  url          = each.value.url
+  file_name    = each.value.file_name
+
+  checksum           = each.value.checksum
+  checksum_algorithm = each.value.checksum_algorithm
+
+  upload_timeout = coalesce(each.value.upload_timeout, var.images_config.global.upload_timeout)
+  overwrite             = coalesce(each.value.overwrite, var.images_config.global.overwrite)
+}
+```
+for_each - оператор цикла, который пройдет по списку образов, которые мы пометили для скачивания.
+coalesce -  встроенная функция для работы с несколькими значениями, которая возвращает первый аргумент, не равный `null`. Если все аргументы равны `null`, функция возвращает `null`. 
+### Переменные
+
+Заполним файл переменных для модуля, согласно документации и выбранных нами переменных:
+```yaml
+variable "images_config" {
+  description = "Configuration object containing images and global settings from YAML file"
+  type = object({
+    global = object({
+      node_name      = string
+      datastore_id   = string
+      upload_timeout = optional(number, 3600)
+      overwrite      = optional(bool, false)
+    })
+    images = map(object({
+      enabled            = bool
+      content_type       = string
+      url                = string
+      file_name          = optional(string)
+      checksum           = optional(string)
+      checksum_algorithm = optional(string)
+      node_name          = optional(string)
+      datastore_id       = optional(string)
+      upload_timeout     = optional(number)
+      overwrite          = optional(bool)
+    }))
+  })
+}
+```
+### Инвентарный файл с образами
+
+Создадим файл с образами, которые хотим скачать![Структура папки configs с файлом images.yaml](./Pasted%20image%2020250920114914.png)
+
+И заполним его сперва global переменными, а потом образ-специфичными:
+```yaml
+global:
+  node_name: "pve1"
+  datastore_id: "local"
+  upload_timeout: 3600
+  overwrite: false
+
+images:
+  ubuntu_22_04:
+    enabled: true
+    content_type: "import"
+    url: "https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img"
+    file_name: "ubuntu-22.04-cloudimg-amd64.img"
+    checksum: "sha256:b2175cd98cfb13f0b5493e8c8b0e6d6c8b2e6b6b6b6b6b6b6b6b6b6b6b6b6b6b"
+   checksum_algorithm: "sha256"
+   # Override global settings for this image
+   node_name: "pve2" # Use different node
+   upload_timeout: 7200 # Longer timeout for this image
+ 
+  debian_12:
+    enabled: true
+    content_type: "import"
+    url: "https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-generic-amd64.qcow2"
+    file_name: "debian-12-generic-amd64.qcow2"
+    checksum: "sha256:d2fbcf11fb28795842e91364d8c7b69f1870db09ff299eb94e4fbbfa510eb78d"
+    checksum_algorithm: "sha256"
+    # Use different datastore for this image
+    datastore_id: "fast-ssd"
+    
+  rocky_linux_9:
+    enabled: false
+    content_type: "import"
+    url: "https://download.rockylinux.org/pub/rocky/9/images/x86_64/Rocky-9-GenericCloud-Base.latest.x86_64.qcow2"
+```
+### Output (для наглядности)
+
+Output - это блок, который позволяет экспортировать значения из модуля или корневой конфигурации и делать их доступными. В нашем случае мы его используем только для того, чтобы посмотреть, какие образа будут у нас скачиваться:
+
+Создадим файл output.tf в папке модуля:
+![Структура папки модуля с добавленным файлом output.tf](./Pasted%20image%2020250920115838.png)
+со следующим содержимым:
+```yaml
+output "downloaded_image_files" {
+  description = "List of downloaded image file names"
+  value = [
+    for key, image in proxmox_virtual_environment_download_file.cloud_images : image.file_name
+  ]
+}
+```
+теперь создадим конфигурационный файл в корне output.tf, который будет вызывать этот аутпут:
+```yaml
+output "downloaded_image_files" {
+  description = "List of downloaded image file names"
+  value       = module.cloud_images.downloaded_image_files
+}
+```
+
+Важное замечание, мы не можем использовать аутпут параметры модуля, которые не заведены в самом модуле, т.е. получить больше, чем указали в первом файле.
+
+Вывод команды terraform plan:
+![Результат выполнения terraform plan - создание двух ресурсов](./Pasted%20image%2020250920120055.png)
+
+Как мы можем видеть, тф создаст нам 2 ресурса, как мы и указали в конфиге.
+
+Если мы попробуем активировать наш 3 образ, в котором не определяем название
+![Активация третьего образа в конфигурации](./Pasted%20image%2020250920120240.png)
+то получим следующее:
+![Результат terraform plan с тремя ресурсами](./Pasted%20image%2020250920120253.png)
+Потому что имя тф "достанет" только после создания ресурса. 
+
+## Итог
+
+В данной статье мы разобрали как создавать модули в terraform на примере images для bpg/proxmox провайдера. По этой логике можно создать модуль на любой ресурс.
