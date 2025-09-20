@@ -8,9 +8,11 @@ tags:
   - proxmox
   - infrastructure as a code
 rss: "Terraform - продолжение. Создание модулей terraform на примере proxmox провайдера bpg"
+seoTitle: "Terraform модули: Создание переиспользуемых компонентов"
+seoDescription: "Пошаговое руководство по созданию Terraform модулей. Разработка модуля для cloud-образов в Proxmox, структура проекта, переменные и outputs."
 ---
 
-В прошлой статье мы переиспользовали мой готовый модуль с ВМ.
+В [предыдущей статье](/blog/terraform-proxmox/) (Terraform + Proxmox) мы переиспользовали мой готовый модуль с ВМ.
 Давайте в этой статье создадим свой модуль для скачивания cloud образов ОС.
 
 ## Cloud-images vs Дистрибутив
