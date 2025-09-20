@@ -7,7 +7,7 @@ type Context = {
 }
 
 export async function GET(context: Context) {
-	const posts = await getCollection("blog")
+  const posts = await getCollection("blog")
   const projects = await getCollection("projects")
 
   const items = [...posts, ...projects]
@@ -19,15 +19,15 @@ export async function GET(context: Context) {
     description: SITE.DESCRIPTION,
     site: context.site,
     items: items.map((item) => {
-      const baseDescription = item.collection === "blog" && item.data.rss 
-        ? item.data.rss 
+      const baseDescription = item.collection === "blog" && item.data.rss
+        ? item.data.rss
         : item.data.summary;
-      
+
       const articleLink = item.collection === "blog"
         ? `${context.site}blog/${item.slug}/`
         : `${context.site}projects/${item.slug}/`;
-      
-      const fullDescription = item.collection === "blog" 
+
+      const fullDescription = item.collection === "blog"
         ? `${baseDescription}\n\nЧитать статью: ${articleLink}`
         : baseDescription;
 

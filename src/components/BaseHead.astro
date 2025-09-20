@@ -11,7 +11,13 @@ interface Props {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = "/open-graph.png", seoTitle, seoDescription } = Astro.props;
+const {
+  title,
+  description,
+  image = "/open-graph.png",
+  seoTitle,
+  seoDescription,
+} = Astro.props;
 
 const finalTitle = seoTitle || title;
 const finalDescription = seoDescription || description;
@@ -27,10 +33,26 @@ const finalDescription = seoDescription || description;
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
 <!-- Apple Touch Icons -->
-<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-iphone-60x60.png" />
-<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-ipad-76x76.png" />
-<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-iphone-retina-120x120.png" />
-<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-ipad-retina-152x152.png" />
+<link
+  rel="apple-touch-icon"
+  sizes="60x60"
+  href="/apple-touch-icon-iphone-60x60.png"
+/>
+<link
+  rel="apple-touch-icon"
+  sizes="76x76"
+  href="/apple-touch-icon-ipad-76x76.png"
+/>
+<link
+  rel="apple-touch-icon"
+  sizes="120x120"
+  href="/apple-touch-icon-iphone-retina-120x120.png"
+/>
+<link
+  rel="apple-touch-icon"
+  sizes="152x152"
+  href="/apple-touch-icon-ipad-retina-152x152.png"
+/>
 
 <!-- Web App Manifest -->
 <link rel="manifest" href="/site.webmanifest" />
@@ -92,7 +114,10 @@ const finalDescription = seoDescription || description;
 <script defer is:inline src="/js/copy.js"></script>
 
 <!-- Umami Analytics -->
-<script defer src="/mi.js" data-website-id="3f4d70b9-c507-4bf0-b9ba-6b8ae65003df"></script>
+<script
+  defer
+  src="/mi.js"
+  data-website-id="3f4d70b9-c507-4bf0-b9ba-6b8ae65003df"></script>
 
 <!-- <ViewTransitions  /> -->
 

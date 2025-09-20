@@ -31,7 +31,11 @@
       "purpose": "maskable"
     }
   ],
-  "categories": ["productivity", "technology", "education"],
+  "categories": [
+    "productivity",
+    "technology",
+    "education"
+  ],
   "lang": "ru",
   "dir": "ltr"
 }
