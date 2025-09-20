@@ -566,6 +566,6 @@ vms:
 
 Мы научились инициализировать терраформ с нуля, создавать виртуальные машины, посмотрели, как пишутся модули, и как с их помощью можно сильно улучшить читаемость конфигов.
 
-Все примеры, лежат в этом [репозитории](https://github.com/VizzleTF/proxmox_terraform).
+Все примеры, лежат в этом [репозитории](https://github.com/VizzleTF/proxmox_terraform/tree/main/tf%2Bproxmox.
 
 Мой боевой домашний конфиг с несколькими дополнительными модулями [тут](https://github.com/VizzleTF/home_proxmox/tree/main/terraform_proxmox)
