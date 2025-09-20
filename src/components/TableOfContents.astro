@@ -5,7 +5,7 @@ interface Props {
 
 const { headings } = Astro.props
 
-// Filter headings to only include h2 and h3 for better readability
+// Filter headings to include h1, h2 and h3 for better readability
 const filteredHeadings = headings.filter(heading => heading.depth <= 3)
 ---
 
@@ -13,16 +13,21 @@ const filteredHeadings = headings.filter(heading => heading.depth <= 3)
   <div class="table-of-contents bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/20 rounded-lg p-4 mb-8">
     <nav>
       <ul class="space-y-1">
-        {filteredHeadings.map((heading) => (
-          <li class={`ml-${(heading.depth - 2) * 4}`}>
-            <a 
-              href={`#${heading.slug}`}
-              class="text-sm text-black/75 dark:text-white/75 hover:text-black dark:hover:text-white transition-colors duration-200 block py-1"
-            >
-              {heading.text}
-            </a>
-          </li>
-        ))}
+        {filteredHeadings.map((heading) => {
+          const marginClass = heading.depth === 1 ? '' : 
+                             heading.depth === 2 ? 'ml-4' : 
+                             heading.depth === 3 ? 'ml-8' : '';
+          return (
+            <li class={marginClass}>
+              <a 
+                href={`#${heading.slug}`}
+                class="text-sm text-black/75 dark:text-white/75 hover:text-black dark:hover:text-white transition-colors duration-200 block py-1"
+              >
+                {heading.text}
+              </a>
+            </li>
+          );
+        })}
       </ul>
     </nav>
   </div>
