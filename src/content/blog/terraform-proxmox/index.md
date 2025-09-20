@@ -1,5 +1,5 @@
 ---
-title: "Proxmox Terraform: Автоматизация виртуальных машин"
+title: "Proxmox Terraform: Инфраструктура как код"
 summary: "Руководство по интеграции Terraform с Proxmox VE. Настройка провайдера, создание VM и модуля."
 date: "Sep 15 2025"
 draft: false
