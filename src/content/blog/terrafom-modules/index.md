@@ -1,6 +1,6 @@
 ---
 title: "Создание модулей Terraform"
-summary: "Небольшой гайд по созданию модулей terraform на примере proxmox провайдера bpg"
+summary: "Гайд по созданию модулей terraform на примере proxmox провайдера bpg"
 date: "Sep 20 2025"
 draft: false
 tags:
