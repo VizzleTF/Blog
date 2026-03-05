@@ -104,7 +104,7 @@ export CONTROL_PLANE_IP=192.168.1.101
 cd ~
 talosctl gen config talos-proxmox-cluster https://$CONTROL_PLANE_IP:6443 --output-dir _out
 ```
-Должно получиться:![](./Pasted%20image%2020250920191633.png)
+Должно получиться:![Сгенерированные конфигурационные файлы Talos в директории _out](./Pasted%20image%2020250920191633.png)
 
 Можно поправить конфиги по желанию, можно оставить дефолт. В рамках первого кластера лучше оставить конфиги дефолтными и без понимания ничего не менять.
 
@@ -268,7 +268,7 @@ talosctl kubeconfig talos.kube.conf
 export KUBECONFIG=~/talos.kube.conf
 kubectl get nodes
 ```
-![](./Pasted%20image%2020250920192949.png)
+![Вывод kubectl get nodes — ноды Kubernetes кластера на Talos в статусе Ready](./Pasted%20image%2020250920192949.png)
 
 Точно также можно добавлять и воркеров в наши ноды, только указывая `user_data_file_id: "memini:snippets/talos-worker.yaml"`
 

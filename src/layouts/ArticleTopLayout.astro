@@ -9,7 +9,7 @@ type Props = {
 
 const { entry } = Astro.props;
 const { collection, data, body } = entry;
-const { title, summary, date } = data;
+const { title, summary, date, tags } = data;
 
 const updatedDate =
   collection === "blog" && data.updatedDate ? data.updatedDate : null;
@@ -52,6 +52,7 @@ const jsonLd =
             url: `${siteUrl}/favicon.png`,
           },
         },
+        keywords: tags?.join(", "),
         mainEntityOfPage: {
           "@type": "WebPage",
           "@id": canonicalUrl,
