@@ -6,22 +6,51 @@ import Footer from "@components/Footer.astro";
 import Drawer from "@components/Drawer.astro";
 import Analytics from "@vercel/analytics/astro";
 import SpeedInsights from "@components/SpeedInsights.astro";
-const { title, description, seoTitle, seoDescription, image } = Astro.props;
+import TwinklingStars from "@components/TwinklingStars.astro";
+import MeteorShower from "@components/MeteorShower.astro";
+const { title, description, seoTitle, seoDescription, image, ogType, author } =
+  Astro.props;
 import { SITE } from "@consts";
 ---
 
-<!doctype html>
-<html lang="ru">
+<!DOCTYPE html>
+<html lang="ru-RU">
   <head>
-    <BaseHead 
-      title={`${title} | ${SITE.TITLE}`} 
+    <BaseHead
+      title={`${title} | ${SITE.TITLE}`}
       description={description}
       seoTitle={seoTitle ? `${seoTitle} | ${SITE.TITLE}` : undefined}
       seoDescription={seoDescription}
       image={image}
+      ogType={ogType}
+      author={author}
     />
   </head>
   <body>
+    <!-- Light Mode: Particles -->
+    <div class="absolute inset-0 block dark:hidden">
+      <div id="particles1" class="fixed inset-0"></div>
+      <div id="particles2" class="fixed inset-0"></div>
+      <div id="particles3" class="fixed inset-0"></div>
+    </div>
+
+    <!-- Dark Theme: Stars -->
+    <div class="absolute inset-0 bg-black hidden dark:block">
+      <div id="stars1" class="fixed inset-0"></div>
+      <div id="stars2" class="fixed inset-0"></div>
+      <div id="stars3" class="fixed inset-0"></div>
+    </div>
+
+    <!-- Dark Theme: Twinkling Stars / Meteors -->
+    <div id="galaxy" class="fixed inset-0">
+      <div class="hidden dark:block">
+        <TwinklingStars />
+        <MeteorShower />
+      </div>
+    </div>
+
+    <script is:inline src="/js/bg.js"></script>
+
     <Header />
     <Drawer />
     <main>

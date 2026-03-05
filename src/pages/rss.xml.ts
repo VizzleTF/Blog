@@ -7,38 +7,27 @@ type Context = {
 }
 
 export async function GET(context: Context) {
-  const posts = await getCollection("blog")
-  const projects = await getCollection("projects")
-
-  const items = [...posts, ...projects]
-
-  items.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  const posts = (await getCollection("blog"))
+    .filter((post) => !post.data.draft)
+    .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
 
   return rss({
     title: SITE.TITLE,
     description: SITE.DESCRIPTION,
     site: context.site,
-    items: items.map((item) => {
-      const baseDescription = item.collection === "blog" && item.data.rss
-        ? item.data.rss
-        : item.data.summary;
-
-      const articleLink = item.collection === "blog"
-        ? `${context.site}blog/${item.slug}/`
-        : `${context.site}projects/${item.slug}/`;
-
-      const fullDescription = item.collection === "blog"
-        ? `${baseDescription}\n\nЧитать статью: ${articleLink}`
-        : baseDescription;
+    items: posts.map((post) => {
+      const description = post.data.rss ?? post.data.summary
+      const articleLink = `${context.site}blog/${post.slug}/`
+      const fullDescription = `${description}\n\nЧитать статью: ${articleLink}`
 
       return {
-        title: item.data.title,
+        title: post.data.title,
         description: fullDescription,
-        pubDate: item.data.date,
-        link: item.collection === "blog"
-          ? `/blog/${item.slug}/`
-          : `/projects/${item.slug}/`,
-      };
+        pubDate: post.data.date,
+        link: `/blog/${post.slug}/`,
+        categories: post.data.tags,
+        author: SITE.AUTHOR,
+      }
     }),
   })
 }

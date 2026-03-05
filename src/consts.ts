@@ -3,7 +3,7 @@ import type { Site, Page, Links, Socials } from "@types"
 // Global
 export const SITE: Site = {
   TITLE: "Сказочный девопес",
-  DESCRIPTION: "Сказочный девопес, блог о девопсе и его инструментах.",
+  DESCRIPTION: "Блог DevOps-инженера о Terraform, Kubernetes, Proxmox, CI/CD и автоматизации инфраструктуры. Практические статьи, инструменты и реальные кейсы.",
   AUTHOR: "Ivan K",
 }
 
@@ -27,17 +27,21 @@ export const SEARCH: Page = {
 
 // Links
 export const LINKS: Links = [
-  { 
-    TEXT: "Главная", 
-    HREF: "/", 
+  {
+    TEXT: "Главная",
+    HREF: "/",
   },
-  { 
-    TEXT: "Блог", 
-    HREF: "/blog", 
+  {
+    TEXT: "Блог",
+    HREF: "/blog",
   },
-  { 
-    TEXT: "Проекты", 
-    HREF: "/projects", 
+  {
+    TEXT: "Проекты",
+    HREF: "/projects",
+  },
+  {
+    TEXT: "Об авторе",
+    HREF: "/about",
   },
 ]
 
@@ -49,13 +53,13 @@ export const SOCIALS: Socials = [
     TEXT: "@gemini_commit",
     HREF: "https://t.me/gemini_commit",
   },
-  { 
+  {
     NAME: "Email",
-    ICON: "email", 
+    ICON: "email",
     TEXT: "vizzletf@gmail.com",
     HREF: "mailto:vizzletf@gmail.com",
   },
-  { 
+  {
     NAME: "Github",
     ICON: "github",
     TEXT: "vizzletf",

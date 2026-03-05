@@ -1,8 +1,9 @@
 ---
 import Container from "@components/Container.astro"
+const { dense = false } = Astro.props;
 ---
 
-<div class="pt-36 pb-5">
+<div class={`pt-36 pb-5 bg-gradient-to-b ${dense ? 'from-white/20 to-white/85 dark:from-black/20 dark:to-black/85' : 'from-white/10 to-white/75 dark:from-black/10 dark:to-black/75'}`}>
   <Container size="md">
     <slot/>
   </Container>

@@ -6,7 +6,7 @@ const subpath = pathname.match(/[^/]+/g);
 import Container from "@components/Container.astro";
 ---
 
-<header id="header" class="fixed top-0 w-full h-16 z-50">
+<header id="header" transition:animate="none" class="fixed top-0 w-full h-16 z-50">
   <Container size="md">
     <div class="relative h-full w-full">
       <div
