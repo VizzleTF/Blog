@@ -71,25 +71,24 @@ Longhorn хранит данные как iSCSI-таргеты и управля
 ```
 terraform_proxmox/
 ├── configs/
-│   └── vms.yaml
+│   └── vms.yaml                    # описание ВМ для модуля vms
 ├── modules/
-│   ├── cloud_images/            # из статьи «Создание модулей Terraform»
-│   ├── vms/                     # из статьи «Terraform + Proxmox»
-│   └── talos/                   # собираем в этой статье
-│       ├── provider.tf
-│       ├── variables.tf
-│       ├── schematic.tf
-│       ├── secrets.tf
-│       ├── configs.tf
-│       ├── apply.tf
+│   ├── cloud_images/               # из статьи «Создание модулей Terraform»
+│   ├── vms/                        # из статьи «Terraform + Proxmox»
+│   └── talos/                      # собираем в этой статье
+│       ├── provider.tf             # провайдеры модуля: talos, proxmox
+│       ├── variables.tf            # входные переменные модуля
+│       ├── schematic.tf            # schematic + URL образа + output
+│       ├── secrets.tf              # machine secrets + talosconfig
+│       ├── configs.tf              # machine_configuration для CP и worker
+│       ├── apply.tf                # apply + bootstrap + kubeconfig
 │       └── patches/
-│           ├── common.yaml
-│           └── controlplane.yaml
-├── backend.tf
-├── provider.tf                  # корневой провайдер
-├── cloud_images.tf              # обновим в этой статье
-├── vm_resources.tf
-└── talos.tf                     # создадим в этой статье
+│           ├── common.yaml         # install, kubelet extraMounts, kernel
+│           └── controlplane.yaml   # VIP + allowSchedulingOnControlPlanes
+├── provider.tf                     # корневой провайдер, из первой статьи
+├── cloud_images.tf                 # обновим в этой статье
+├── vm_resources.tf                 # вызов module "vms", из статьи про модули
+└── talos.tf                        # создадим в этой статье
 ```
 
 Заводим папку `modules/talos`, в ней файл `modules/talos/provider.tf`:
