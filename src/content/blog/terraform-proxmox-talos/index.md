@@ -9,9 +9,6 @@ tags:
   - talos
   - kubernetes
   - infrastructure as code
-  - automation
-  - devops
-  - cloud-init
 rss: "Развертываем Kubernetes кластер на Talos Linux в Proxmox через Terraform. Полная автоматизация от создания VM до готового кластера с помощью Infrastructure as Code!"
 seoTitle: "Terraform Proxmox Talos: Автоматизация Kubernetes кластера через IaC"
 seoDescription: "Пошаговое руководство по развертыванию Kubernetes кластера на Talos Linux в Proxmox VE через Terraform. Настройка cloud-init, создание модулей, автоматизация конфигурации нод и bootstrap кластера с помощью Infrastructure as Code."

@@ -6,7 +6,7 @@ draft: false
 tags:
   - terraform
   - proxmox
-  - infrastructure as a code
+  - infrastructure as code
 rss: "Terraform - продолжение. Создание модулей terraform на примере proxmox провайдера bpg"
 seoTitle: "Terraform модули: Создание переиспользуемых компонентов"
 seoDescription: "Пошаговое руководство по созданию Terraform модулей. Разработка модуля для cloud-образов в Proxmox, структура проекта, переменные и outputs."

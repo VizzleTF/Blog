@@ -5,9 +5,7 @@ date: "Apr 20 2026"
 draft: false
 tags:
   - kubernetes
-  - kubectl
   - cheatsheet
-  - operations
 rss: "Шпаргалка по kubectl для тех, кому надоело каждый раз набирать полную команду. Разбираю свой набор алиасов из .zshrc (kg, kd, ked, kdelp, klf и компания) + команды без алиасов - port-forward, rollout, kubectl diff, kubectl explain, netshoot для отладки сети."
 seoTitle: "kubectl cheatsheet: алиасы и команды для Kubernetes-оператора"
 seoDescription: "Шпаргалка по kubectl: готовый набор алиасов для zsh (kg, kd, ked, kdelp, klf и другие), переключение между несколькими kubeconfig через переменные окружения, команды для отладки - port-forward, rollout, logs, top, exec, kubectl diff, netshoot. С разделением на безопасные и деструктивные операции."
