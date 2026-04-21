@@ -113,23 +113,19 @@ const stack = [
     <div class="mx-auto max-w-screen-sm p-5 space-y-24 pb-16">
       <!-- Blog Preview Section -->
       <section class="animate">
-        <div class="space-y-4">
-          <div class="flex justify-between">
-            <p class="font-semibold text-black dark:text-white">
+        <div>
+          <div class="flex items-baseline justify-between mb-2">
+            <h2 class="text-base font-semibold text-black dark:text-white tracking-tight">
               Последние посты
-            </p>
+            </h2>
             <a
               href="/blog"
-              class="w-fit col-span-3 group flex gap-1 items-center underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend"
+              class="group text-sm text-dim hover:text-accent transition-colors"
             >
-              <span
-                class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend"
-              >
-                Все посты
-              </span>
+              Все посты →
             </a>
           </div>
-          <ul class="space-y-4">
+          <ul class="flex flex-col border-t border-black/10 dark:border-white/15">
             {
               posts.map((post) => (
                 <li>
@@ -143,12 +139,37 @@ const stack = [
 
       <!-- QR Code Section -->
       <section class="animate">
-        <div class="flex justify-center mt-8">
+        <div class="flex flex-col items-center gap-3 mt-8">
           <img
             src="/telegram.png"
             alt="QR код для быстрого доступа к Telegram каналу Сказочный девопес"
             class="max-w-xs rounded-lg shadow-md"
           />
+          <a
+            href="https://t.me/gemini_commit"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 font-mono text-xs text-accent font-semibold hover:underline underline-offset-4"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M21 4L2.5 11.5l6 2.2 2.2 6.3L15 14l4.5 4L21 4z"></path>
+              <path d="M8.5 13.7L21 4l-9.5 10"></path>
+            </svg>
+            t.me/gemini_commit
+          </a>
+          <div class="text-xs text-dim">
+            Канал в Telegram — короткие заметки
+          </div>
         </div>
       </section>
     </div>

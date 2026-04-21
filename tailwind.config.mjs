@@ -7,7 +7,14 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        "sans": ["Atkinson", ...defaultTheme.fontFamily.sans],
+        "sans": ["Inter", "Atkinson", ...defaultTheme.fontFamily.sans],
+        "mono": ["JetBrains Mono", "Menlo", ...defaultTheme.fontFamily.mono],
+      },
+      colors: {
+        accent: {
+          DEFAULT: "oklch(0.75 0.15 155)",
+          soft: "oklch(0.75 0.15 155 / 0.15)",
+        },
       },
       typography: {
         DEFAULT: {

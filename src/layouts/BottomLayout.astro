@@ -1,10 +1,11 @@
 ---
 import Container from "@components/Container.astro"
-const { dense = false } = Astro.props;
+type Size = "sm" | "md" | "lg" | "xl" | "2xl";
+const { dense = false, size = "md" } = Astro.props as { dense?: boolean; size?: Size };
 ---
 
 <div class={`flex-1 py-5 ${dense ? 'bg-white/85 dark:bg-black/85' : 'bg-white/75 dark:bg-black/75'}`}>
-  <Container size="md">
+  <Container size={size}>
     <slot/>
   </Container>
 </div>

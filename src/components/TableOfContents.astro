@@ -1,35 +1,51 @@
 ---
 interface Props {
   headings: { depth: number; slug: string; text: string }[];
+  sidebar?: boolean;
 }
 
-const { headings } = Astro.props;
+const { headings, sidebar = false } = Astro.props;
 
-// Filter headings to include h1, h2 and h3 for better readability
 const filteredHeadings = headings.filter((heading) => heading.depth <= 3);
 ---
 
 {
   filteredHeadings.length > 0 && (
-    <div class="table-of-contents bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/20 rounded-lg p-4 mb-8">
+    <div
+      class={
+        sidebar
+          ? "toc-sidebar"
+          : "table-of-contents bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/20 rounded-lg p-4 mb-8"
+      }
+    >
+      <div class="font-mono text-[11px] uppercase tracking-[0.18em] text-dim mb-3">
+        Содержание
+      </div>
       <nav>
-        <ul class="space-y-1">
-          {filteredHeadings.map((heading) => {
-            const marginClass =
+        <ul class="space-y-0.5">
+          {filteredHeadings.map((heading, i) => {
+            const indent =
               heading.depth === 1
                 ? ""
                 : heading.depth === 2
-                  ? "ml-4"
-                  : heading.depth === 3
-                    ? "ml-8"
-                    : "";
+                  ? "pl-0"
+                  : "pl-4";
             return (
-              <li class={marginClass}>
+              <li class={indent}>
                 <a
                   href={`#${heading.slug}`}
-                  class="text-sm text-black/75 dark:text-white/75 hover:text-black dark:hover:text-white transition-colors duration-200 block py-1"
+                  class="toc-link flex items-baseline gap-2 py-1 text-[13.5px] leading-tight text-dim hover:text-accent transition-colors"
                 >
-                  {heading.text}
+                  {sidebar && heading.depth === 2 && (
+                    <span class="font-mono text-[10.5px] text-dim tabular-nums">
+                      {String(
+                        filteredHeadings
+                          .filter((h) => h.depth === 2)
+                          .findIndex((h) => h.slug === heading.slug) + 1,
+                      ).padStart(2, "0")}
+                    </span>
+                  )}
+                  <span>{heading.text}</span>
                 </a>
               </li>
             );
@@ -41,9 +57,9 @@ const filteredHeadings = headings.filter((heading) => heading.depth <= 3);
 }
 
 <style>
-  .table-of-contents a:hover {
+  .toc-link:hover {
     text-decoration: underline;
     text-decoration-thickness: 1px;
-    text-underline-offset: 2px;
+    text-underline-offset: 3px;
   }
 </style>

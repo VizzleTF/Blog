@@ -4,6 +4,8 @@
 
 :root {
   --copy-btn-margin: 10px;
+  --accent: oklch(0.75 0.15 155);
+  --accent-soft: oklch(0.75 0.15 155 / 0.15);
 }
 
 @layer base {
@@ -39,8 +41,7 @@ html {
   overflow-y: scroll;
   color-scheme: light;
   background-color: white;
-  font-family: "Atkinson", sans-serif;
-
+  font-family: "Inter", "Atkinson", system-ui, -apple-system, sans-serif;
 }
 
 html.dark {
@@ -52,11 +53,17 @@ html,
 body {
   @apply h-full w-full antialiased;
   @apply bg-white dark:bg-black;
-  @apply text-black/75 dark:text-white/75;
+  color: rgba(10, 10, 10, 0.9);
+}
+
+html.dark body {
+  color: rgba(255, 255, 255, 0.9);
 }
 
 body {
   @apply relative flex flex-col;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 main {
@@ -78,8 +85,142 @@ header.scrolled {
   @apply backdrop-blur-sm saturate-200;
 }
 
+/* ===== Prose / article typography ===== */
 article {
   @apply prose dark:prose-invert max-w-full pb-12;
+}
+
+article.prose {
+  --tw-prose-body: rgba(10, 10, 10, 0.9);
+  --tw-prose-headings: #0a0a0a;
+  --tw-prose-links: #0a0a0a;
+  --tw-prose-bold: #0a0a0a;
+  --tw-prose-quotes: #0a0a0a;
+  --tw-prose-code: #0a0a0a;
+  --tw-prose-counters: rgba(10, 10, 10, 0.7);
+  --tw-prose-bullets: rgba(10, 10, 10, 0.45);
+  font-size: 17px;
+  line-height: 1.68;
+}
+
+html.dark article.prose {
+  --tw-prose-body: rgba(255, 255, 255, 0.9);
+  --tw-prose-headings: #ffffff;
+  --tw-prose-links: #ffffff;
+  --tw-prose-bold: #ffffff;
+  --tw-prose-quotes: #ffffff;
+  --tw-prose-code: #ffffff;
+  --tw-prose-counters: rgba(255, 255, 255, 0.7);
+  --tw-prose-bullets: rgba(255, 255, 255, 0.35);
+}
+
+article.prose h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+article.prose h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(10, 10, 10, 0.12);
+  margin-top: 2.25rem;
+  margin-bottom: 1rem;
+}
+html.dark article.prose h2 {
+  border-bottom-color: rgba(255, 255, 255, 0.14);
+}
+
+article.prose h3 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-top: 1.75rem;
+  margin-bottom: 0.875rem;
+}
+
+article.prose a {
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+article.prose a:hover {
+  text-decoration-thickness: 2px;
+  color: var(--accent);
+}
+
+article.prose code {
+  font-family: "JetBrains Mono", "Menlo", ui-monospace, monospace;
+  font-size: 0.875em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(10, 10, 10, 0.05);
+  color: var(--accent);
+  font-weight: 500;
+}
+article.prose code::before,
+article.prose code::after {
+  content: none;
+}
+html.dark article.prose code {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+article.prose pre {
+  font-family: "JetBrains Mono", "Menlo", ui-monospace, monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  padding: 16px 18px;
+  padding-right: 52px;
+  border-radius: 10px;
+  border: 1px solid rgba(10, 10, 10, 0.12);
+  background: #0f1419;
+  color: #e6e6e6;
+  overflow-x: auto;
+  position: relative;
+}
+html.dark article.prose pre {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: #111111;
+}
+article.prose pre code {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+article.prose blockquote {
+  margin: 1.75rem 0;
+  padding: 0.875rem 1.125rem;
+  border-left: 3px solid var(--accent);
+  font-style: normal;
+  font-weight: 400;
+  color: var(--tw-prose-quotes);
+  background: rgba(10, 10, 10, 0.02);
+  border-radius: 0 6px 6px 0;
+}
+html.dark article.prose blockquote {
+  background: rgba(255, 255, 255, 0.03);
+}
+article.prose blockquote p::before,
+article.prose blockquote p::after {
+  content: none;
+}
+
+article.prose ul > li::marker {
+  color: var(--accent);
+}
+article.prose ol > li::marker {
+  color: rgba(10, 10, 10, 0.6);
+}
+html.dark article.prose ol > li::marker {
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .page-heading {
@@ -88,6 +229,14 @@ article {
 
 .blend {
   @apply transition-all duration-300 ease-in-out;
+}
+
+/* Page-level dimmed text utility (single opacity, no more doubling) */
+.text-dim {
+  color: rgba(10, 10, 10, 0.72);
+}
+html.dark .text-dim {
+  color: rgba(255, 255, 255, 0.72);
 }
 
 /** Light theme particles on home page */
@@ -169,20 +318,57 @@ article img {
   @apply rotate-315;
 }
 
-.copy-cnt {
-  @apply absolute w-full;
-  top: var(--copy-btn-margin);
+/* Copy button wrapper: button stays in top-right of visible code block,
+   does not move when the code scrolls horizontally. */
+.code-wrapper {
+  position: relative;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.code-wrapper > pre {
+  margin: 0;
 }
 
 .copy-btn {
-  @apply w-[30px] fixed;
-  left: calc(100% - var(--copy-btn-margin));
-  transform: translateX(-100%);
+  position: absolute;
+  top: var(--copy-btn-margin);
+  right: var(--copy-btn-margin);
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  z-index: 2;
 }
+
+/* Legacy class retained in case any prior DOM still uses it */
+.copy-cnt { display: none; }
 
 .copy-svg {
   @apply w-full aspect-square text-white opacity-70 hover:opacity-90;
 }
+
+/* ===== Sidebar TOC (article pages, wide viewports) ===== */
+.article-sidebar-toc {
+  position: sticky;
+  top: 96px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  padding-left: 14px;
+  border-left: 1px solid rgba(10, 10, 10, 0.12);
+}
+html.dark .article-sidebar-toc {
+  border-left-color: rgba(255, 255, 255, 0.14);
+}
+
+/* Hide scrollbar on sidebar TOC */
+.article-sidebar-toc::-webkit-scrollbar { width: 0; }
+.article-sidebar-toc { scrollbar-width: none; }
 
 /* Card transition */
 /* .fade-move-enter-active,

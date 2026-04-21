@@ -151,7 +151,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
               </svg>
             </button>
           </div>
-          <ul class="flex flex-col gap-3">
+          <ul class="flex flex-col border-t border-black/10 dark:border-white/15">
             {collection().map((entry) => (
               <li>
                 <ArrowCard entry={entry} />

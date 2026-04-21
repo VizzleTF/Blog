@@ -1,45 +1,40 @@
+// Wrap every <pre><code> in a positioned wrapper so the copy button stays
+// in the top-right of the visible code block regardless of horizontal scroll.
 const codeBlocks = document.querySelectorAll('pre:has(code)');
 
-//add copy btn to every code block on the dom
-codeBlocks.forEach((code) => {
-  //button icon
+codeBlocks.forEach((pre) => {
+  // Skip if already processed
+  if (pre.parentElement && pre.parentElement.classList.contains('code-wrapper')) return;
+
+  // Wrapper provides the positioning context for the copy button
+  const wrapper = document.createElement('div');
+  wrapper.classList.add('code-wrapper');
+  pre.parentNode.insertBefore(wrapper, pre);
+  wrapper.appendChild(pre);
+
+  // Copy button icon
   const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
   use.setAttribute('href', '/copy.svg#empty');
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   svg.classList.add('copy-svg');
   svg.appendChild(use);
 
-  //create button
   const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.setAttribute('aria-label', 'Copy code');
   btn.appendChild(svg);
   btn.classList.add('copy-btn');
-  btn.addEventListener('click', (e) => copyCode(e));
+  btn.addEventListener('click', (e) => copyCode(e, pre));
 
-  //container to fix copy button
-  const container = document.createElement('div');
-  container.classList.add('copy-cnt');
-  container.appendChild(btn);
-
-  //add to code block
-  code.classList.add('relative');
-  code.appendChild(container);
+  wrapper.appendChild(btn);
 });
 
-/**
-* @param {MouseEvent} event
-*/
-function copyCode(event) {
-  let codeBlock = getChildByTagName(event.currentTarget.parentElement.parentElement, 'CODE')
-  navigator.clipboard.writeText(codeBlock.innerText)
-  const use = getChildByTagName(getChildByTagName(event.currentTarget, 'svg'), 'use');
-  use.setAttribute('href', '/copy.svg#filled')
-  setTimeout(() => {
-    if (use) {
-      use.setAttribute('href', '/copy.svg#empty')
-    }
-  }, 100);
-}
-
-function getChildByTagName(element, tagName) {
-  return Array.from(element.children).find((child) => child.tagName === tagName);
+function copyCode(event, pre) {
+  const codeEl = pre.querySelector('code');
+  if (!codeEl) return;
+  navigator.clipboard.writeText(codeEl.innerText);
+  const use = event.currentTarget.querySelector('svg use');
+  if (!use) return;
+  use.setAttribute('href', '/copy.svg#filled');
+  setTimeout(() => use.setAttribute('href', '/copy.svg#empty'), 800);
 }

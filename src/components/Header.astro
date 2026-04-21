@@ -43,6 +43,36 @@ import Container from "@components/Container.astro";
 
       <div class="buttons absolute right-0 top-1/2 -translate-y-1/2 flex gap-1">
         <a
+          href="https://t.me/gemini_commit"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Telegram канал @gemini_commit"
+          title="Telegram · @gemini_commit"
+          class={cn(
+            "hidden md:flex",
+            "size-9 rounded-full p-2 items-center justify-center",
+            "bg-transparent hover:bg-accent/10",
+            "border border-black/10 dark:border-white/25",
+            "text-accent",
+            "transition-colors duration-300 ease-in-out",
+          )}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="size-full"
+          >
+            <path d="M21 4L2.5 11.5l6 2.2 2.2 6.3L15 14l4.5 4L21 4z"></path>
+            <path d="M8.5 13.7L21 4l-9.5 10"></path>
+          </svg>
+        </a>
+
+        <a
           href="/search"
           aria-label={`Search blog posts and projects on ${SITE.TITLE}`}
           class={cn(

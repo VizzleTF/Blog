@@ -21,11 +21,17 @@ const estimated_initial_size =
 <PageLayout title={BLOG.TITLE} description={BLOG.DESCRIPTION}>
   <TopLayout>
     <div class="animate">
-      <h1 class="text-3xl font-semibold text-black dark:text-white mt-2">
+      <div class="font-mono text-[11px] uppercase tracking-[0.18em] text-dim">
+        Блог
+      </div>
+      <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-black dark:text-white mt-2">
         {BLOG.TITLE}
       </h1>
-      <div class="mt-1">
+      <p class="mt-2 text-dim max-w-xl leading-relaxed">
         {BLOG.DESCRIPTION}
+      </p>
+      <div class="font-mono text-xs text-dim mt-6">
+        <span class="text-accent">$</span> ls ./posts —by date —desc
       </div>
     </div>
   </TopLayout>

@@ -1,4 +1,4 @@
-import { formatDate, truncateText } from "@lib/utils"
+import { formatDate, readingTime } from "@lib/utils"
 import type { CollectionEntry } from "astro:content"
 
 type Props = {
@@ -7,38 +7,43 @@ type Props = {
 }
 
 export default function ArrowCard({ entry, pill }: Props) {
+  const estimatedReading =
+    entry.collection === "blog"
+      ? readingTime(entry.body).replace("min read", "мин")
+      : null
+
   return (
-    <a href={`/${entry.collection}/${entry.slug}`} class="group p-4 gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-colors duration-300 ease-in-out">
-      <div class="w-full group-hover:text-black group-hover:dark:text-white blend">
+    <a
+      href={`/${entry.collection}/${entry.slug}`}
+      class="group grid grid-cols-[90px_1fr_auto] md:grid-cols-[110px_1fr_auto] items-baseline gap-4 py-4 border-b border-black/10 dark:border-white/15 hover:border-accent transition-colors duration-200"
+    >
+      <div class="font-mono text-[11px] uppercase tracking-wider text-dim tabular-nums">
+        {formatDate(entry.data.date)}
+      </div>
+
+      <div class="min-w-0">
         <div class="flex flex-wrap items-center gap-2">
-          {pill &&
-            <div class="text-sm capitalize px-2 py-0.5 rounded-full border border-black/15 dark:border-white/25">
+          {pill && (
+            <span class="font-mono text-[10px] uppercase tracking-wider px-1.5 py-0.5 rounded border border-black/15 dark:border-white/20 text-dim">
               {entry.collection === "blog" ? "post" : "project"}
-            </div>
-          }
-          <div class="text-sm uppercase">
-            {formatDate(entry.data.date)}
+            </span>
+          )}
+          <div class="font-sans text-[15px] md:text-[16px] font-semibold leading-snug text-black dark:text-white group-hover:text-accent transition-colors">
+            {entry.data.title}
           </div>
         </div>
-        <div class="font-semibold mt-3 text-black dark:text-white line-clamp-2">
-          {entry.data.title}
-        </div>
-
-        <div class="text-sm line-clamp-2">
-          {entry.data.summary}
-        </div>
-        <ul class="flex flex-wrap mt-2 gap-1">
-          {entry.data.tags.map((tag: string) => ( // this line has an error; Parameter 'tag' implicitly has an 'any' type.ts(7006)
-            <li class="text-xs uppercase py-0.5 px-2 rounded bg-black/5 dark:bg-white/20 text-black/75 dark:text-white/75">
-              {truncateText(tag, 20)}
-            </li>
+        <ul class="flex flex-wrap gap-x-2 gap-y-1 mt-2 font-mono text-[11px] text-accent">
+          {entry.data.tags.map((tag: string) => (
+            <li>#{tag}</li>
           ))}
         </ul>
       </div>
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="stroke-current group-hover:stroke-black group-hover:dark:stroke-white">
-        <line x1="5" y1="12" x2="19" y2="12" class="scale-x-0 group-hover:scale-x-100 translate-x-4 group-hover:translate-x-1 transition-all duration-300 ease-in-out" />
-        <polyline points="12 5 19 12 12 19" class="translate-x-0 group-hover:translate-x-1 transition-all duration-300 ease-in-out" />
-      </svg>
+
+      {estimatedReading && (
+        <div class="font-mono text-[11px] text-dim whitespace-nowrap">
+          {estimatedReading}
+        </div>
+      )}
     </a>
   )
 }

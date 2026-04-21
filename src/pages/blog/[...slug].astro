@@ -31,12 +31,14 @@ const author = "Ivan K";
   ogType="article"
   author={author}
 >
-  <TopLayout dense>
-    <div class="animate">
-      <ArticleTopLayout entry={post} />
+  <TopLayout dense size="2xl">
+    <div class="animate lg:grid lg:grid-cols-[220px_minmax(0,960px)_220px] lg:gap-10 lg:justify-center">
+      <div class="lg:col-start-2">
+        <ArticleTopLayout entry={post} />
+      </div>
     </div>
   </TopLayout>
-  <BottomLayout dense>
+  <BottomLayout dense size="2xl">
     <div class="animate">
       <ArticleBottomLayout entry={post} />
     </div>
