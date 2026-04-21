@@ -24,4 +24,4 @@ Disallow: /
 User-agent: CCBot
 Disallow: /
 
-Sitemap: https://devops.vaka.work/sitemap-index.xml
+Sitemap: https://onlyyaml.dev/sitemap-index.xml
