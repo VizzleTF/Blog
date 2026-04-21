@@ -7,7 +7,6 @@ tags:
   - talos
   - kubernetes
   - cheatsheet
-  - operations
 rss: "Небольшая шпаргалка по talosctl: как посмотреть состояние нод, прочитать логи, обновить Talos и Kubernetes, безопасно править machine config через --mode=try, снять снапшот etcd и что вообще ни в коем случае не запускать на живом кластере."
 seoTitle: "Talos cheatsheet: talosctl команды для обслуживания Kubernetes-кластера"
 seoDescription: "Шпаргалка по Talos Linux: ключевые команды talosctl для домашнего Kubernetes-кластера. Экспорт talosconfig, осмотр, логи, apply-config с режимом try, upgrade с A/B-rollback, etcd snapshot, reset, reboot. С разделением на безопасные и деструктивные операции."
