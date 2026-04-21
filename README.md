@@ -11,7 +11,7 @@ Modern personal blog and portfolio built with Astro, featuring DevOps content, p
 - **Search**: [Fuse.js](https://fusejs.io/) - Fuzzy search library
 - **Comments**: [Giscus](https://giscus.app/) - GitHub Discussions-powered comments
 - **Analytics**: Vercel Analytics & Speed Insights
-- **Deployment**: Vercel (configured for devops.vaka.work)
+- **Deployment**: Cloudflare Pages (configured for onlyyaml.dev)
 
 ## 🎨 Features
 
@@ -25,7 +25,7 @@ Modern personal blog and portfolio built with Astro, featuring DevOps content, p
 
 ## 🚀 Deployment
 
-The site is configured for deployment on Vercel with the domain `devops.vaka.work`.
+The site is configured for deployment on Cloudflare Pages with the domain `onlyyaml.dev`.
 
 ## 📊 Content Categories
 
@@ -55,6 +55,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 🔗 Links
 
-- **Live Site**: [devops.vaka.work](https://devops.vaka.work)
+- **Live Site**: [onlyyaml.dev](https://onlyyaml.dev)
 - **Astro Documentation**: [docs.astro.build](https://docs.astro.build)
 - **Tailwind CSS**: [tailwindcss.com](https://tailwindcss.com)

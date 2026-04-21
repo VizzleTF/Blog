@@ -6,7 +6,7 @@ import solidJs from "@astrojs/solid-js"
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://devops.vaka.work",
+  site: "https://onlyyaml.dev",
   integrations: [
     mdx(),
     sitemap({
